@@ -22,9 +22,16 @@ USER git
 WORKDIR /home/git
 
 ENV PATH /home/git/gitolite/src:$PATH
+ENV GITOLITE_REMOTE git://github.com/sitaramc/gitolite
 
 RUN \
-  git clone git://github.com/sitaramc/gitolite && \
+  GITOLITE_STABLE=$(\
+    git ls-remote --tags $GITOLITE_REMOTE | \
+    grep -o 'v3.*[0-9]$' | \
+    sort -t '.' -k 2,3 -g | \
+    tail -1 \
+  ) && \
+  git clone --depth 1 --branch $GITOLITE_STABLE $GITOLITE_REMOTE && \
   test -f .ssh/id_rsa.pub || ( \
     mkdir .ssh && \
     ssh-keygen -t rsa -b 2048 -f .ssh/id_rsa -N '' && \
