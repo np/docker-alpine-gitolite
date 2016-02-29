@@ -12,10 +12,10 @@ RUN \
   passwd -u git && \
   # Forbid SSH password auth for git user
   ( \
-    echo \
-    echo "# Gitolite changes from $(date)" \
-    echo "Match User git" \
-    echo "    PasswordAuthentication no" \
+    echo ""; \
+    echo "# Gitolite changes from $(date)"; \
+    echo "Match User git"; \
+    echo "    PasswordAuthentication no"; \
   ) >> sshd_config
 
 USER git
