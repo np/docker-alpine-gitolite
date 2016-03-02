@@ -10,7 +10,7 @@ Uses latest stable gitolite of 3.x
 
 ## Go into
 
-    docker ps --filter=name=gitolite && docker stop gitolite && docker rm gitolite
+    docker ps --filter=name=gitolite && docker rm --force gitolite
     docker run --detach --name=gitolite ekapusta/alpine-gitolite
     docker exec --interactive=true --tty=true gitolite sh
 

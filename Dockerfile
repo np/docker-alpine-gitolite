@@ -1,7 +1,5 @@
 FROM ekapusta/alpine-sshd
 
-WORKDIR /etc/ssh
-
 RUN \
   apk --no-cache add git perl && \
   # Add group named "git"
@@ -16,7 +14,8 @@ RUN \
     echo "# Gitolite changes from $(date)"; \
     echo "Match User git"; \
     echo "    PasswordAuthentication no"; \
-  ) >> sshd_config
+  ) >> /etc/ssh/sshd_config && \
+  VOL-save /etc/ssh
 
 USER git
 WORKDIR /home/git
@@ -39,7 +38,9 @@ RUN \
     cat .ssh/id_rsa.pub && \
     echo \
   ) && \
-  touch .ssh/authorized_keys && \
-  USER=$(whoami) gitolite setup --pubkey ~/.ssh/id_rsa.pub
+  touch .ssh/authorized_keys
 
 USER root
+
+RUN \
+  echo "su git -c 'USER=git gitolite setup --pubkey ~/.ssh/id_rsa.pub'" > /dcr/cm.d/090-gitolite-050-setup
