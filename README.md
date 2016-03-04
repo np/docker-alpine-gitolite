@@ -8,12 +8,25 @@ Uses latest stable gitolite of 3.x
 
     docker build --tag=ekapusta/alpine-gitolite .
 
+### Override through ENV
+
+ * GITOLITE_ADMIN_KEY
+ * GITOLITE_REMOTE
+
+
+## Run on 2222 port with public-key passed
+
+    docker run --name=gitolite --detach --publish=2222:22 \
+           --env=GITOLITE_ADMIN_KEY="$(cat ~/.ssh/id_rsa.pub)" \
+           ekapusta/alpine-gitolite
+
 ## Go into
 
-    docker ps --filter=name=gitolite && docker rm --force gitolite
-    docker run --detach --name=gitolite ekapusta/alpine-gitolite
+    docker rm --force gitolite && \
+    docker run --detach --name=gitolite ekapusta/alpine-gitolite && \
     docker exec --interactive=true --tty=true gitolite sh
 
 ## Debug
 
+    ssh git@localhost -p 2222
     docker run --rm ekapusta/alpine-gitolite
