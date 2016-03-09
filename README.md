@@ -18,6 +18,7 @@ Uses latest stable gitolite of 3.x
 
     docker run --name=gitolite --detach --publish=2222:22 \
            --env=GITOLITE_ADMIN_KEY="$(cat ~/.ssh/id_rsa.pub)" \
+           --volume=$(pwd)/vol/home/git/repositories:/home/git/repositories \
            ekapusta/alpine-gitolite
 
 ## Go into
