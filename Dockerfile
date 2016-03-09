@@ -26,6 +26,7 @@ ENV GITOLITE_REMOTE git://github.com/sitaramc/gitolite
 # You can use it to setup first time
 ENV GITOLITE_ADMIN_KEY ""
 # .. or mount host file to /home/gitolite/admin.pub
+ENV GITOLITE_ADMIN_NAME admin
 
 RUN \
   GITOLITE_STABLE=$(\

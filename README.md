@@ -11,6 +11,7 @@ Uses latest stable gitolite of 3.x
 ### Override through ENV
 
  * GITOLITE_ADMIN_KEY
+ * GITOLITE_ADMIN_NAME admin
  * GITOLITE_REMOTE
 
 
