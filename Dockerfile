@@ -2,25 +2,26 @@ FROM ekapusta/alpine-sshd
 
 RUN \
   apk --no-cache add git perl && \
-  # Add group named "git"
-  addgroup git && \
-  # Add user without password to group "git" with name "git"
-  adduser -D -G git -s /bin/sh git && \
-  # Unlock git account (as it was with empty password)
-  passwd -u git && \
-  # Forbid SSH password auth for git user
+  # Add group named "gitolite"
+  addgroup gitolite && \
+  # Add user without password to group "gitolite" with name "gitolite"
+  adduser -D -G gitolite -s /bin/sh gitolite && \
+  # Unlock gitolite account (as it was with empty password)
+  passwd -u gitolite && \
+  # Forbid SSH password auth for gitolite user
   ( \
     echo ""; \
     echo "# Gitolite changes from $(date)"; \
-    echo "Match User git"; \
+    echo "Match User gitolite"; \
     echo "    PasswordAuthentication no"; \
   ) >> /etc/ssh/sshd_config && \
   VOL-save /etc/ssh
 
-USER git
-WORKDIR /home/git
+USER gitolite
+WORKDIR /home/gitolite
 
-ENV PATH /home/git/gitolite/src:$PATH
+ENV PATH /home/gitolite/gitolite/src:$PATH
+ENV USER gitolite
 ENV GITOLITE_REMOTE git://github.com/sitaramc/gitolite
 
 # You can use it to setup first time
