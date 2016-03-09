@@ -18,4 +18,4 @@ if [ -d ./repositories/gitolite-admin.git-tmp ]; then
   mv ./repositories/gitolite-admin.git-tmp ./repositories/gitolite-admin.git
 fi
 
-su gitolite -c "cd repositories/gitolite-admin.git && GL_LIBDIR=$(gitolite query-rc GL_LIBDIR) hooks/post-update refs/heads/master"
+su gitolite -c "cd repositories/gitolite-admin.git && GL_LIBDIR=$(gitolite query-rc GL_LIBDIR) ~/.gitolite/hooks/gitolite-admin/post-update refs/heads/master"
