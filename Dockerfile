@@ -20,6 +20,8 @@ RUN \
 USER gitolite
 WORKDIR /home/gitolite
 
+ENV SSHD_OPTION_PERMIT_ROOT_LOGIN no 
+
 ENV PATH /home/gitolite/gitolite/src:$PATH
 ENV USER gitolite
 ENV GITOLITE_REMOTE git://github.com/sitaramc/gitolite
