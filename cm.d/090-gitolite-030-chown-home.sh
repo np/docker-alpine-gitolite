@@ -1,3 +1,3 @@
-echo "Chowning gitolite's home as of mounted volumes"
+echo "Chowning git's home as of mounted volumes"
 
-chown -R gitolite:gitolite /home/gitolite
+chown -R git:git /home/git

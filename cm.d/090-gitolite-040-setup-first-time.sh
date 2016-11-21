@@ -11,11 +11,11 @@ echo "Setting up gitolite first time"
 
 mv ./repositories/gitolite-admin.git ./repositories/gitolite-admin.git-tmp
 
-su gitolite -c 'gitolite setup -a dummy'
+su git -c 'gitolite setup -a dummy'
 
 if [ -d ./repositories/gitolite-admin.git-tmp ]; then
   rm -rf ./repositories/gitolite-admin.git
   mv ./repositories/gitolite-admin.git-tmp ./repositories/gitolite-admin.git
 fi
 
-su gitolite -c "cd repositories/gitolite-admin.git && GL_LIBDIR=$(gitolite query-rc GL_LIBDIR) ~/.gitolite/hooks/gitolite-admin/post-update refs/heads/master"
+su git -c "cd repositories/gitolite-admin.git && GL_LIBDIR=$(gitolite query-rc GL_LIBDIR) ~/.gitolite/hooks/gitolite-admin/post-update refs/heads/master"
